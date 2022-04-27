@@ -39,12 +39,11 @@ def applyEffect(img, fontSize, charCount):
 
     for x in range(imgResized.shape[1]):
         for y in range(imgResized.shape[0]):
-            p = imgResized.shape[x][y][0]
-            charIndex = int( interpolate(p, (0,255), (0,charCount)) )
+            p = imgResized[x][y]
+            charIndex = int( interpolate(p, (0,255), (0,charCount-1)) )
             c = chars[charIndex][1]
-
-            cv.putText(newImg, c, (x*fontSize, y*fontSize), cv.FONT_HERSHEY_SIMPLEX, fontSize, (255,255,255), 1)
-    
+            cv.putText(newImg, "hello world", (x*fontSize, y*fontSize), cv.FONT_HERSHEY_SIMPLEX, fontSize, (255,255,255), 1)
+            return newImg
     return newImg
 
 
@@ -54,4 +53,4 @@ def applyAndSave(path, fontSize, charCount):
     cv.imwrite("effectCV.png", img)
 
 
-applyAndSave("images/test.png",12,8)
+applyAndSave("images/test.png",4,16)
